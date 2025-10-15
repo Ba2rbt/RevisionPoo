@@ -9,7 +9,6 @@ class Product
     public function __construct(
         private int $id,
         private string $name,
-        /** @var array<int, string> */
         private array $photos,
         private int $price,
         private string $description,
@@ -27,7 +26,6 @@ class Product
 
     public function getId(): int { return $this->id; }
     public function getName(): string { return $this->name; }
-    /** @return array<int, string> */
     public function getPhotos(): array { return $this->photos; }
     public function getPrice(): int { return $this->price; }
     public function getDescription(): string { return $this->description; }
@@ -84,9 +82,6 @@ class Category
     public function getCreatedAt(): DateTime { return $this->createdAt; }
     public function getUpdatedAt(): DateTime { return $this->updatedAt; }
 
-    /**
-     * @return array<int, Product>
-     */
     public function getProducts(): array
     {
         if (self::$pdo === null) {

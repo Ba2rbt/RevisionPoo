@@ -15,7 +15,6 @@ abstract class AbstractProduct
     public function __construct(
         protected ?int $id,
         protected string $name,
-        /** @var array<int, string> */
         protected array $photos,
         protected int $price,
         protected string $description,
@@ -57,9 +56,7 @@ abstract class AbstractProduct
     public function getName(): string { return $this->name; }
     public function setName(string $name): void { $this->name = $name; }
 
-    /** @return array<int, string> */
     public function getPhotos(): array { return $this->photos; }
-    /** @param array<int, string> $photos */
     public function setPhotos(array $photos): void { $this->photos = $photos; }
 
     public function getPrice(): int { return $this->price; }
@@ -82,9 +79,6 @@ abstract class AbstractProduct
 
     abstract public static function findOneById(int $id): static|false;
 
-    /**
-     * @return array<int, static>
-     */
     abstract public static function findAll(): array;
 
     abstract public function create(): static|false;
@@ -262,9 +256,6 @@ class Clothing extends AbstractProduct implements StockableInterface
         return self::hydrate($row);
     }
 
-    /**
-     * @return array<int, static>
-     */
     public static function findAll(): array
     {
         $pdo = self::requireConnection();
@@ -464,9 +455,6 @@ class Electronic extends AbstractProduct implements StockableInterface
         return self::hydrate($row);
     }
 
-    /**
-     * @return array<int, static>
-     */
     public static function findAll(): array
     {
         $pdo = self::requireConnection();

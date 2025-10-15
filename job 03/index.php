@@ -2,14 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Mini-MCD (Modèle Conceptuel de Données)
- *
- * [Category] 1 --- n [Product]
- * - Un produit appartient à exactement une catégorie (via category_id)
- * - Une catégorie peut contenir plusieurs produits
- */
-
 $databasePath = __DIR__ . DIRECTORY_SEPARATOR . 'shop.sqlite';
 $dsn = 'sqlite:' . $databasePath;
 
@@ -112,13 +104,11 @@ $productRows = $pdo->query('SELECT * FROM product ORDER BY id')->fetchAll();
 
 echo "Catégories enregistrées :\n";
 foreach ($categoryRows as $row) {
-    /** @var array<string, string> $row */
     print_r($row);
 }
 
 echo "\nProduits enregistrés :\n";
 foreach ($productRows as $row) {
-    /** @var array<string, mixed> $row */
     $row['photos'] = json_decode($row['photos'], true, 512, JSON_THROW_ON_ERROR);
     print_r($row);
 }

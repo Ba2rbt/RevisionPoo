@@ -9,7 +9,6 @@ class Product
     public function __construct(
         protected ?int $id,
         protected string $name,
-        /** @var array<int, string> */
         protected array $photos,
         protected int $price,
         protected string $description,
@@ -51,9 +50,7 @@ class Product
     public function getName(): string { return $this->name; }
     public function setName(string $name): void { $this->name = $name; }
 
-    /** @return array<int, string> */
     public function getPhotos(): array { return $this->photos; }
-    /** @param array<int, string> $photos */
     public function setPhotos(array $photos): void { $this->photos = $photos; }
 
     public function getPrice(): int { return $this->price; }
@@ -221,9 +218,6 @@ class Clothing extends Product
         return self::hydrate($row);
     }
 
-    /**
-     * @return array<int, Clothing>
-     */
     public static function findAll(): array
     {
         $pdo = self::requireConnection();
@@ -399,9 +393,6 @@ class Electronic extends Product
         return self::hydrate($row);
     }
 
-    /**
-     * @return array<int, Electronic>
-     */
     public static function findAll(): array
     {
         $pdo = self::requireConnection();

@@ -9,7 +9,6 @@ class Product
     public function __construct(
         private ?int $id,
         private string $name,
-        /** @var array<int, string> */
         private array $photos,
         private int $price,
         private string $description,
@@ -42,9 +41,6 @@ class Product
         return self::hydrate($row);
     }
 
-    /**
-     * @return array<int, Product>
-     */
     public static function findAll(): array
     {
         if (self::$pdo === null) {
@@ -134,7 +130,6 @@ class Product
     }
 
     public function getName(): string { return $this->name; }
-    /** @return array<int, string> */
     public function getPhotos(): array { return $this->photos; }
     public function getPrice(): int { return $this->price; }
     public function getDescription(): string { return $this->description; }

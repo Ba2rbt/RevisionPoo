@@ -1,13 +1,10 @@
 <?php
 
 declare(strict_types=1);
-
-// Classe Product identique à celle déjà utilisée dans les jobs précédents.
 class Product
 {
     private int $id;
     private string $name;
-    /** @var array<int, string> */
     private array $photos;
     private int $price;
     private string $description;
@@ -44,9 +41,7 @@ class Product
     public function getName(): string { return $this->name; }
     public function setName(string $name): void { $this->name = $name; }
 
-    /** @return array<int, string> */
     public function getPhotos(): array { return $this->photos; }
-    /** @param array<int, string> $photos */
     public function setPhotos(array $photos): void { $this->photos = $photos; }
 
     public function getPrice(): int { return $this->price; }
@@ -68,7 +63,6 @@ class Product
     public function setUpdatedAt(DateTime $updatedAt): void { $this->updatedAt = $updatedAt; }
 }
 
-// Emplacement de la base créée au job 03.
 $databasePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'job 03' . DIRECTORY_SEPARATOR . 'draft-shop.sqlite';
 $dsn = 'sqlite:' . $databasePath;
 
@@ -76,7 +70,6 @@ $pdo = new PDO($dsn);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->exec('PRAGMA foreign_keys = ON');
 
-// On s'assure que les tables existent (au cas où le script précédent n'aurait pas été exécuté).
 $pdo->exec(
     'CREATE TABLE IF NOT EXISTS category (
         id INTEGER PRIMARY KEY,
@@ -102,7 +95,6 @@ $pdo->exec(
     )'
 );
 
-// Données minimales pour garantir l'existence du produit id = 7.
 $pdo->prepare(
     'INSERT OR IGNORE INTO category (id, name, description, created_at, updated_at)
      VALUES (:id, :name, :description, :created_at, :updated_at)'
@@ -132,7 +124,6 @@ $pdo->prepare(
     'updated_at' => '2025-10-09T08:45:00',
 ]);
 
-// Requête pour récupérer le produit id = 7 en tableau associatif.
 $stmt = $pdo->prepare('SELECT * FROM product WHERE id = :id');
 $stmt->execute(['id' => 7]);
 $productData = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -141,7 +132,6 @@ if ($productData === false) {
     throw new RuntimeException('Aucun produit avec l\'id 7 trouvé dans la base.');
 }
 
-// Hydratation de l'objet Product avec les données de la base.
 $hydratedProduct = new Product(
     (int) $productData['id'],
     (string) $productData['name'],

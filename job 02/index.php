@@ -1,6 +1,5 @@
 <?php
 
-// Nouvelle fiche pour nos catégories dans la boutique.
 class Category
 {
     private int $id;
@@ -39,7 +38,6 @@ class Category
     public function setUpdatedAt(DateTime $updatedAt): void { $this->updatedAt = $updatedAt; }
 }
 
-// On remet notre fiche Produit, avec un lien vers une catégorie.
 class Product
 {
     private int $id;
@@ -48,7 +46,7 @@ class Product
     private int $price;
     private string $description;
     private int $quantity;
-    private int $categoryId;   // Nouvel identifiant de catégorie
+    private int $categoryId;
     private DateTime $createdAt;
     private DateTime $updatedAt;
 
@@ -102,7 +100,6 @@ class Product
     public function setUpdatedAt(DateTime $updatedAt): void { $this->updatedAt = $updatedAt; }
 }
 
-// Exemple d'utilisation pour vérifier le bon fonctionnement.
 $category = new Category(
     100,
     'Peluches',

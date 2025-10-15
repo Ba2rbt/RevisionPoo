@@ -9,7 +9,6 @@ class Product
     public function __construct(
         private int $id,
         private string $name,
-        /** @var array<int, string> */
         private array $photos,
         private int $price,
         private string $description,
